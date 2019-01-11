@@ -42,7 +42,7 @@ class FixerViewModel : ViewModel() {
             override fun onFailure(call: Call<FixerResponse>, t: Throwable) {}
 
             override fun onResponse(call: Call<FixerResponse>, response: Response<FixerResponse>) {
-                adapterItems?.value = setData(response.body()!!)
+                adapterItems?.value = createAdapterDataSet(response.body()!!)
             }
         })
     }
@@ -57,7 +57,7 @@ class FixerViewModel : ViewModel() {
 
             override fun onResponse(call: Call<FixerResponse>, response: Response<FixerResponse>) {
 
-                setData(response.body()!!).forEach {
+                createAdapterDataSet(response.body()!!).forEach {
                     adapterItems?.value?.add(it)
                 }
             }
@@ -78,7 +78,7 @@ class FixerViewModel : ViewModel() {
         return responseDate!!.format(formatter)
     }
 
-    private fun setData(response: FixerResponse): MutableList<Rate> {
+    private fun createAdapterDataSet(response: FixerResponse): MutableList<Rate> {
 
         val result: MutableList<Rate> = mutableListOf<Rate>()
         result.add(Rate(response.date, null, "", ""))
