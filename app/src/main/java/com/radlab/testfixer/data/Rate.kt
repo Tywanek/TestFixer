@@ -1,3 +1,5 @@
 package com.radlab.testfixer.data
 
-data class Rate(val date:String, val name:String, val value: String)
+import java.io.Serializable
+
+data class Rate(val date: String?, val rateDate: String?, val name:String, val value: String):Serializable

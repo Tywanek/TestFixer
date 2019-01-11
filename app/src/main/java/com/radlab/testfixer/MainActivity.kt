@@ -1,15 +1,14 @@
 package com.radlab.testfixer
 
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.*
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_SETTLING
 import com.radlab.testfixer.adapters.RatesAdapter
 import com.radlab.testfixer.data.Rate
 import com.radlab.testfixer.viewModels.FixerViewModel
@@ -19,7 +18,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), RatesAdapter.OnRateClickListener {
 
     override fun onRateClick(item: Rate) {
-        Toast.makeText(this@MainActivity, item.name, Toast.LENGTH_SHORT).show()
+        if(item.rateDate!=null){
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.putExtra(getString(R.string.EXTRA_DETAIL_ITEM), item)
+            startActivity(intent)
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

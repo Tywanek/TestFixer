@@ -70,8 +70,8 @@ class FixerViewModel : ViewModel() {
 
         if (responseDate == null) {
             responseDate = LocalDate.now().minusDays(1)
-        }else{
-           responseDate = responseDate!!.minusDays(1)
+        } else {
+            responseDate = responseDate!!.minusDays(1)
         }
 
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -81,14 +81,14 @@ class FixerViewModel : ViewModel() {
     private fun setData(response: FixerResponse): MutableList<Rate> {
 
         val result: MutableList<Rate> = mutableListOf<Rate>()
-        result.add(Rate(response.date, "", ""))
+        result.add(Rate(response.date, null, "", ""))
 
         response.rates.javaClass.declaredFields.iterator().forEach {
             val field = response.rates.javaClass.getDeclaredField(it.name)
             field.isAccessible = true
 
             val value = field.getDouble(response.rates)
-            result.add(Rate("", it.name, value.toString()))
+            result.add(Rate(null, response.date, it.name, value.toString()))
         }
         return result
     }

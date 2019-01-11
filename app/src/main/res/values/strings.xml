@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TestFixer</string>
+    <string name="EXTRA_DETAIL_ITEM">extra_object</string>
 </resources>
